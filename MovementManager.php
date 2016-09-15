@@ -44,6 +44,11 @@ class MovementManager implements MovementManagerInterface
 
     public function moveForward(ElevatorInterface $elevator)
     {
+        if ($elevator->getWaypoints()->count()===1) {
+            $this->moveToTheOnlyWaypoint($elevator);
+            return $this;
+        }
+
         if ($elevator->getState()->getDirection()===ElevatorStateInterface::DIRECTION_UP) {
             $this->moveUp($elevator);
         } elseif ($elevator->getState()->getDirection()===ElevatorStateInterface::DIRECTION_DOWN) {
