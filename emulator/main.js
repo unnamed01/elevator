@@ -576,8 +576,8 @@ var initButton = {
 };
 
 var client = {
-    baseUrl: 'http://e.com:4568/index.php',
-    stateUrl: 'http://e.com:4568/state.php',
+    baseUrl: 'http://elevator.com:4568/index.php',
+    stateUrl: 'http://elevator.com:4568/state.php',
 
     loadState: function(){
         var data = {};
