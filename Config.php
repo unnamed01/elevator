@@ -5,11 +5,12 @@ namespace Elevator;
 
 class Config implements ConfigInterface
 {
-    const BASE_DIR = '/home/vagrant/p/elevator_new';
+    const BASE_DIR = '/home/vagrant/p/elevator';
 
     public function getBaseDir()
     {
-        return self::BASE_DIR;
+        return __DIR__;
+        //return self::BASE_DIR;
     }
 
     public function getElevators()

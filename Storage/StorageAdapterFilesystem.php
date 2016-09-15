@@ -23,6 +23,8 @@ class StorageAdapterFilesystem implements StorageAdapterInterface
     public function __construct(Config $config)
     {
         $this->config = $config;
+        
+        $this->createTmpDir();
     }
 
     public function getElevatorStateById($elevatorId)
@@ -143,6 +145,16 @@ class StorageAdapterFilesystem implements StorageAdapterInterface
         }
     }
 
+    private function createTmpDir()
+    {
+        $dir = $this->config->getBaseDir() . '/' . self::TMP_DIR;
+        if (!file_exists($dir)) {
+            mkdir($dir);
+        }
+
+        return $this;
+    }
+    
     private function getWaypointsFileName($elevatorId)
     {
         $filename = sprintf(
