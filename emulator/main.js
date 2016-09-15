@@ -825,7 +825,7 @@ var connectionManager = {
     connect: function(){
         var self = this;
         var conn = new ab.Session(
-            'ws://e.com:8080',
+            'ws://elevator.com:8080',
             function(){
                 self.topics.forEach(function(topic){
                     console.log('Subscribe: ', topic.name);

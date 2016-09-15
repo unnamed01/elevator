@@ -2,7 +2,7 @@
 <head>
 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 <script>
-    var conn = new ab.Session('ws://e.com:8080',
+    var conn = new ab.Session('ws://elevator.com:8080',
         function() {
             conn.subscribe('doors', function(component, data) {
                 // This is where you would add the new article to the DOM (beyond the scope of this tutorial)
