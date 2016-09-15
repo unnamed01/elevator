@@ -13,6 +13,8 @@ class BackendFactory
 {
     public function create()
     {
+        $config = new Config;
+
         $elevatorManagerFactory = new ElevatorManagerFactory;
         $elevatorManager = $elevatorManagerFactory->create();
 
@@ -24,6 +26,6 @@ class BackendFactory
         $movementManagerFactory = new MovementManagerFactory();
         $movementManager = $movementManagerFactory->create();
 
-        return new Backend($elevatorManager, $waypointFilter, $doorClient, $movementManager);
+        return new Backend($config, $elevatorManager, $waypointFilter, $doorClient, $movementManager);
     }
 }

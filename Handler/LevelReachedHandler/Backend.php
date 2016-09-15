@@ -2,6 +2,7 @@
 
 namespace Elevator\Handler\LevelReachedHandler;
 
+use Elevator\Config;
 use Elevator\Door\DoorClientInterface;
 use Elevator\ElevatorInterface;
 use Elevator\ElevatorManagerInterface;
@@ -11,6 +12,11 @@ use Elevator\Waypoint\WaypointFilterInterface;
 
 class Backend
 {
+    /**
+     * @var Config
+     */
+    private $config;
+
     /**
      * @var ElevatorManagerInterface
      */
@@ -32,11 +38,13 @@ class Backend
     private $movementManager;
 
     public function __construct(
+        Config $config,
         ElevatorManagerInterface $elevatorManager,
         WaypointFilterInterface $waypointFilter,
         DoorClientInterface $doorClient,
         MovementManagerInterface $movementManager
     ) {
+        $this->config = $config;
         $this->elevatorManager = $elevatorManager;
         $this->waypointFilter = $waypointFilter;
         $this->doorClient = $doorClient;
@@ -45,7 +53,7 @@ class Backend
 
     public function handle($elevatorId, $levelReached)
     {
-        $elevator = $this->elevatorManager->getElevatorById($elevatorId);
+        $elevator = $this->elevatorManager->getElevatorById($this->config->getElevatorByHtmlId($elevatorId)['id']);
 
         $elevator->setLevel($levelReached);
         $this->elevatorManager->saveElevator($elevator);

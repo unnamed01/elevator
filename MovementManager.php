@@ -104,6 +104,6 @@ class MovementManager implements MovementManagerInterface
         $this->elevatorManager->saveElevator($elevator);
 
         $levelReachedHandler = $this->backendFactory->create();
-        $levelReachedHandler->fakeHandle($elevator->getId(), $waypoint->getLevel());
+        $levelReachedHandler->fakeHandle($elevator->getState()->getHtmlId(), $waypoint->getLevel());
     }
 }

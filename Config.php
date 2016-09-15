@@ -30,6 +30,20 @@ class Config implements ConfigInterface
 
     }
 
+    public function getElevatorByHtmlId($htmlId)
+    {
+        $elevators = $this->getElevators();
+        $theRequired = array_reduce($elevators, function($carry, $item) use ($htmlId) {
+            if($item['htmlId']===$htmlId){
+                return $item;
+            } else {
+                return $carry;
+            }
+        });
+
+        return $theRequired;
+    }
+
     public function getFloors()
     {
         return [
