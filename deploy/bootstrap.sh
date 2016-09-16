@@ -11,8 +11,9 @@ sudo add-apt-repository ppa:ondrej/php -y
 sudo aptitude update
 sudo aptitude install -y php5.6
 
-sudo aptitude install -y git
 
+
+#zmq and binding
 sudo aptitude install -y php-pear php5.6-dev php5.6-xml
 
 sudo aptitude install -y gcc make autoconf pkg-config
@@ -36,10 +37,12 @@ ldconfig -p | grep zmq
 
 
 
-
-
+#download sources
+sudo aptitude install -y git
 mkdir -p /home/vagrant/p/elevator && cd /home/vagrant/p/elevator
 git clone https://github.com/unnamed01/elevator.git .
+
+
 
 #apache2 virtual host
 sudo mkdir -m0666 /var/log/apache2/elevator.com && sudo chown root:adm /var/log/apache2/elevator.com
@@ -54,6 +57,9 @@ sudo service apache2 reload
 
 sudo aptitude install -y zip unzip
 
+
+
+#composer
 cd /home/vagrant/downloads
 wget "https://getcomposer.org/installer"
 chmod a+x installer
@@ -64,22 +70,10 @@ composer self-update
 
 cd /home/vagrant/p/elevator && composer install
 
+
+
+#last step
 sudo mkdir -m0777 /home/vagrant/p/elevator/tmp
 sudo chown -R vagrant:vagrant /home/vagrant/downloads /home/vagrant/p
 
 php /home/vagrant/p/elevator/bin/push-server.php &
-
-
-#git init
-#git config --global user.email "unnamed01@gmail.com"
-#git config --global user.name "unnamed"
-#git add .
-#git commit -m "First commit"
-#git remote add origin https://github.com/unnamed01/elevator.git
-
-
-
-#if ! [ -L /var/www ]; then
-#  rm -rf /var/www
-#  ln -fs /vagrant /var/www
-#fi
