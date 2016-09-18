@@ -89,7 +89,7 @@ class Backend
         return $this->handle($elevatorId, $levelReached);
     }
 
-    public function tryLocal(ElevatorInterface $elevator, $levelReached)
+    private function tryLocal(ElevatorInterface $elevator, $levelReached)
     {
         $currentDirection = $elevator->getState()->getDirection();
 

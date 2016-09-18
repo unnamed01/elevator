@@ -4,6 +4,7 @@ namespace Elevator\SystemState;
 
 use Elevator\Config;
 use Elevator\Storage\StorageAdapterFilesystem;
+use Elevator\SystemState\ElevatorState\ElevatorStateCollectionFactory;
 
 class SystemStateFactory
 {
@@ -12,6 +13,8 @@ class SystemStateFactory
         $config = new Config;
         $storageAdapter = new StorageAdapterFilesystem($config);
 
-        return new SystemState($storageAdapter);
+        $elevatorStateCollectionFactory = new ElevatorStateCollectionFactory;
+
+        return new SystemState($storageAdapter, $elevatorStateCollectionFactory);
     }
 }

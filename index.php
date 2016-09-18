@@ -11,36 +11,10 @@ define('BASE_PATH', realpath(dirname(__FILE__)));
 
 require __DIR__ . '/vendor/autoload.php';
 
-/*spl_autoload_register(function($class){
-    $parts = explode('\\', $class);
-
-    if (array_shift($parts) !== 'Elevator') {
-        throw new Exception(sprintf('Unable to load class %s', $class));
-    }
-
-    $filename = BASE_PATH . DIRECTORY_SEPARATOR . join(DIRECTORY_SEPARATOR, $parts) . '.php';
-
-    require $filename;
-});*/
-
-
-
-
-
-/*$_REQUEST = [
-    'data' => json_encode([
-        'type' => \Elevator\Dispatcher::REQUEST_TYPE_REQUEST_BUTTON,
-        'direction' => ElevatorStateInterface::DIRECTION_UP,
-        'floor' => 1,
-    ]),
-];*/
-
-
 $entryPointFactory = new EntryPointFactory;
 $entryPoint = $entryPointFactory->create();
 
 $response = $entryPoint->handle($_REQUEST);
-
 
 
 //$response->sendHeaders();

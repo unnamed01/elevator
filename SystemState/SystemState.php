@@ -4,11 +4,12 @@ namespace Elevator\SystemState;
 
 use Elevator\Storage\StorageAdapterInterface;
 use Elevator\SystemState\ElevatorState\ElevatorStateCollection;
+use Elevator\SystemState\ElevatorState\ElevatorStateCollectionFactory;
 
 class SystemState implements SystemStateInterface
 {
     /**
-     * @var array
+     * @var ElevatorStateCollection
      */
     private $elevatorStatesCollection;
 
@@ -17,9 +18,17 @@ class SystemState implements SystemStateInterface
      */
     private $storageAdapter;
 
-    public function __construct(StorageAdapterInterface $storageAdapter)
-    {
+    /**
+     * @var ElevatorStateCollectionFactory
+     */
+    private $elevatorStateCollectionFactory;
+
+    public function __construct(
+        StorageAdapterInterface $storageAdapter,
+        ElevatorStateCollectionFactory $elevatorStateCollectionFactory
+    ) {
         $this->storageAdapter = $storageAdapter;
+        $this->elevatorStateCollectionFactory = $elevatorStateCollectionFactory;
     }
 
     public function isSystemInitialized()
@@ -53,17 +62,8 @@ class SystemState implements SystemStateInterface
 
     protected function getElevatorStatesCollection()
     {
-        $elevatorStatesData = $this->storageAdapter->getElevatorStates();
-
-        $elevatorStates = $elevatorStatesData;
-        /*$elevatorStateFactory = new ElevatorStateFactory;
-        $elevatorStates = [];
-        foreach ($elevatorStatesData as $elevatorStateData) {
-            $elevatorState = $elevatorStateFactory->create($elevatorStateData);
-            $elevatorStates[] = $elevatorState;
-        }*/
-
-        $elevatorStatesCollection =  new ElevatorStateCollection($elevatorStates);
+        $elevatorStates = $this->storageAdapter->getElevatorStates();
+        $elevatorStatesCollection =  $this->elevatorStateCollectionFactory->create($elevatorStates);
 
         return $elevatorStatesCollection;
     }

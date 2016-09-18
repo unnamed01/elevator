@@ -55,8 +55,6 @@ class EntryPoint implements EntryPointInterface
             $message = $this->buildErrorMessage($e);
 
             $response->setError($message);
-            //var_dump($e->getTrace());
-            //$response->setError($e->getMessage() . PHP_EOL . str_repeat('-', 250) . $e->getTraceAsString());
         }
 
         return $response;

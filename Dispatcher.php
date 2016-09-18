@@ -44,7 +44,7 @@ class Dispatcher implements DispatcherInterface
         $handler->handle($request, $response);
     }
 
-    public function getHandlers()
+    private function getHandlers()
     {
         return [
             self::REQUEST_TYPE_INIT           => $this->initHandlerFactory->create(),
